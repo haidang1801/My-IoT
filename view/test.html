@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Example</title>
+</head>
+<style>
+  @keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blinking {
+  animation: blink 1s infinite;
+}
+</style>
+<body>
+  <button id="myButton">Nhấp vào đây</button>
+
+  <script>
+    const button = document.getElementById("myButton");
+
+    function toggleBlinking() {
+      button.classList.toggle("blinking");
+    }
+
+    button.addEventListener("click", toggleBlinking);
+  </script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="bootstrap/css/style.css">
+    <style>
+      th,td {
+        text-align: center;
+        border: 1px solid #333;
+      }
+      .sort {
+        cursor: pointer;
+      }
+    </style>
+
+</head>
+<body class="bg-body-secondary">
+    
+    <!-- menu -->
+    <nav class="navbar navbar-expand-lg bg-body-secondary sticky-md-top">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-bolder text-uppercase" href="dashboard.html">Hai Dang</a>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="about_me.html">Profile</a></li>
+              <hr class="dropdown-divider">
+              <li><a class="dropdown-item" href="database.html">Database</a></li>
+            </ul>
+          </div>
+          </div>
+        </nav>
+        <!-- menu -->
+  
+      <!-- offcanvas -->
+      
+      <div class="offcanvas offcanvas-start bg-body-secondary text-black edit-canvas" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-body p-0">
+          <nav class="nacbar-dark">
+            <ul class="navbar-nav">
+              <li>
+                <div class="text-muted small fw-bold text-uppercase px-3 mt-3">
+                  core
+                </div>
+              </li>
+              <li>
+                <a href="about_me.html" class="nav-link px-3 active">
+                  <span>
+                    <i class="bi bi-person-circle"></i>
+                  </span>
+                  <span>Profile</span>
+                </a>
+              </li>
+              <li>
+                <a href="dashboard.html" class="nav-link px-3 active">
+                  <span>
+                    <i class="bi bi-speedometer2"></i>
+                  </span>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="database.html" class="nav-link px-3 active">
+                  <span>
+                    <i class="bi bi-database"></i>
+                  </span>
+                  <span>Database</span>
+                </a>
+              </li>
+              <li>
+                <a href="history.html" class="nav-link px-3 active">
+                  <span>
+                    <i class="bi bi-clock-history"></i>
+                  </span>
+                  <span>History Action</span>
+                </a>
+              </li>
+              <li class="my-4">
+                <hr>
+              </li>
+              <li>
+                <div class="text-muted small fw-bold text-uppercase px-3">
+                  Interface
+                </div>
+              </li>
+  
+              <li>
+                  <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <span class="me-2"><i class="bi bi-grid"></i></span>
+                    <span>Layouts</span>
+                    <span class="right-icon ms-auto"><i class="bi bi-chevron-down"></i></span>
+                  </a>
+                <div class="collapse" id="collapseExample">
+                  <div >
+                    <ul class="navbar-nav ps-3">
+                      <li>
+                        <a href="#" class="nav-link px-3">
+                          <span class="me-2">
+                            <i class="bi bi-thermometer"></i>
+                          </span>
+                          <span>Temperature</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" class="nav-link px-3">
+                          <span class="me-2">
+                            <i class="bi bi-moisture"></i>
+                          </span>
+                          <span>Humidity</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+  
+      <!-- offcanvas -->
+  
+      <!-- content -->
+      <main >
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 fw-bold fs-3">
+              History Action
+            </div>
+            <div class="col-md-6 search" style="padding-bottom: 1rem;">
+              <form action="/search">
+                <label for="name">Name: </label>
+                <select name="name" id="searchName">
+                  <option value="lamp-1">Lamp 1</option>
+                  <option value="lamp-2">Lamp 2</option>
+                  <option value="lamp-3">Lamp 3</option>
+                </select>
+                <input type="button" onclick="search()" value="Search" >
+              </form>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 0.5rem;">
+              <form action="/searchDate" method="GET">
+                <label for="search-date-from">From</label>
+                <input type="date" id="search-date-from" name="from">
+                <label for="search-date-from">To</label>
+                <input type="date" id="search-date-to" name="to">
+                <input type="button" onclick="searchDate()" value="Search" >
+              </form>
+            </div>
+          </div>
+          <div class="row" style="padding-left: 1rem; padding-right: 1rem;">
+            <table class="table table-hover ">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>
+                          <span>Id</span>
+                          <span class="sort" id="sortIdDesc"><i class="bi bi-caret-down-fill"></i></span>
+                          <span class="sort" id="sortIdAsc"><i class="bi bi-caret-up-fill"></i></span>
+                        </th>
+                        <th>Name</th>
+                        <th>Action</th>
+                        <th>
+                          <span>Time</span>
+                          <span class="sort" id="sortTimeDesc"><i class="bi bi-caret-down-fill"></i></span>
+                          <span class="sort" id="sortTimeAsc"><i class="bi bi-caret-up-fill"></i></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-end pagination-sm">
+                <li class="page-item" id="first"><a class="page-link" href="#">1</a></li>
+                <li class="page-item" id="second"><a class="page-link" href="#">2</a></li>
+                <li class="page-item" id="last"><a class="page-link" href="#">>></a></li>
+                <li class="page-item" id="last">
+                  <span><input id="pagingDatabase" type="text" name="page" style="width: 2rem;"></span>
+                  <span id="totalPage">/</span>
+                </li>
+              </ul>
+            </nav>
+              </div>
+            </div>
+        </div>
+      </main>
+      <!-- content -->
+      <script src="./bootstrap/js/history.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="./bootstrap/js/jquery.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
